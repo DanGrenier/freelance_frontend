@@ -11,18 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var http_1 = require("@angular/http");
+var proposal_1 = require("./proposal");
+var proposal_service_1 = require("./proposal.service");
 var ProposalShowComponent = (function () {
-    function ProposalShowComponent(route) {
+    function ProposalShowComponent(route, proposalService, http) {
         this.route = route;
+        this.proposalService = proposalService;
+        this.http = http;
     }
     ProposalShowComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.routeId = this.route.params.subscribe(function (params) {
-            _this.id = +params['id'];
+        var proposalRequest = this.route.params
+            .flatMap(function (params) {
+            return _this.proposalService.getProposal(+params['id']);
         });
+        proposalRequest.subscribe(function (response) { return _this.proposal = response.json(); });
     };
     return ProposalShowComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", proposal_1.Proposal)
+], ProposalShowComponent.prototype, "proposal", void 0);
 ProposalShowComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
@@ -30,7 +41,9 @@ ProposalShowComponent = __decorate([
         templateUrl: 'proposal-show.component.html',
         styleUrls: ['proposal-show.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        proposal_service_1.ProposalService,
+        http_1.Http])
 ], ProposalShowComponent);
 exports.ProposalShowComponent = ProposalShowComponent;
 //# sourceMappingURL=proposal-show.component.js.map

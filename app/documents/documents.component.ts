@@ -48,7 +48,5 @@ export class DocumentsComponent implements OnInit{
     //	this.documents = documents} , function error{
     //	this.errorMessage = <any>error})
     }
-    })
-
-	}
+   
 }

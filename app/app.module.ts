@@ -12,6 +12,7 @@ import { ProposalListComponent } from './proposal/proposal-list.component';
 import { ProposalNewComponent } from './proposal/proposal-new.component';
 import { AppRoutingModule } from './app-routing.module'
 import { ProposalShowComponent} from './proposal/proposal-show.component';
+import { ProposalService} from './proposal/proposal.service'
 
 @NgModule({
 	imports: [
@@ -29,7 +30,8 @@ import { ProposalShowComponent} from './proposal/proposal-show.component';
 	  ProposalNewComponent,
 	  ProposalShowComponent],
 	  providers: [
-	  DocumentService
+	  DocumentService,
+	  ProposalService
 	  ],
 	bootstrap: [AppComponent]
 })
